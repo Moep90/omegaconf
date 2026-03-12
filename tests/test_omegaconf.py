@@ -571,7 +571,7 @@ def test_resolve_does_not_raise_when_resolver_adds_keys() -> None:
             "z": 3,
         }
     finally:
-        OmegaConf.clear_resolvers()
+        OmegaConf.clear_resolver("merge_test")
 
 
 @mark.parametrize(
