@@ -58,7 +58,7 @@ def _resolve(cfg: Node, escape_interpolation_strings: bool) -> Node:
             cfg._set_value(val)
 
     if isinstance(cfg, DictConfig):
-        for k in cfg.keys():
+        for k in list(cfg.keys()):  # snapshot keys; a resolver may structurally modify the dict
             _resolve_container_value(cfg, k, escape_interpolation_strings)
 
     elif isinstance(cfg, ListConfig):

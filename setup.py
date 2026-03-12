@@ -10,7 +10,6 @@ OmegaConf setup
 """
 import pathlib
 
-import pkg_resources
 import setuptools
 
 from build_helpers.build_helpers import (
@@ -22,11 +21,11 @@ from build_helpers.build_helpers import (
     find_version,
 )
 
-with pathlib.Path("requirements/base.txt").open() as requirements_txt:
-    install_requires = [
-        str(requirement)
-        for requirement in pkg_resources.parse_requirements(requirements_txt)
-    ]
+install_requires = [
+    line.strip()
+    for line in pathlib.Path("requirements/base.txt").read_text().splitlines()
+    if line.strip() and not line.strip().startswith("#")
+]
 
 
 with open("README.md", "r") as fh:
